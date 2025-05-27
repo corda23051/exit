@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Exit Program Message</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+  body, html {
+    height: 100%;
+    margin: 0;
+    background-image: url('dou.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+            background-position:center;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+
+  #container {
+    text-align: center;
+  }
+
+  button {
+    padding: 1rem 2.5rem;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 40px;
+    background: #ff6f61;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(255,111,97,0.6);
+    transition: background 0.3s ease;
+    user-select: none;
+  }
+  button:hover {
+    background: #ff3b2e;
+  }
+
+  .animated-text {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    border-right: 3px solid rgba(255,255,255,0.75);
+    overflow: hidden;
+    width: 0;
+    margin: 0 auto;
+    animation:
+      typing 4s steps(30, end) forwards,
+      blink 0.75s step-end infinite;
+  }
+
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 26ch; }
+  }
+
+  @keyframes blink {
+    50% { border-color: transparent; }
+  }
+</style>
+</head>
+<body>
+  <div id="container">
+    <button id="exitBtn" aria-label="Exit program">Exit Program</button>
+  </div>
+
+  <script>
+    const container = document.getElementById('container');
+    const exitBtn = document.getElementById('exitBtn');
+
+    exitBtn.addEventListener('click', () => {
+      container.innerHTML = '<div class="animated-text" role="alert" aria-live="assertive">Thank you for visiting my program</div>';
+    });
+  </script>
+</body>
+</html>
+
