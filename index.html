@@ -1,84 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Exit Program Message</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
-
-  body, html {
-    height: 100%;
-    margin: 0;
-    background-image: url('Messenger_creation_6DCFFBD2-07AA-47BF-BDCA-AEF2ABE48B9B.jpeg');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Exit Message</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('o.jpeg');
     background-size: cover;
     background-repeat: no-repeat;
             background-position:center;
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-  }
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
 
-  #container {
-    text-align: center;
-  }
+        .exit-container {
+            text-align: center;
+            color: white;
+        }
 
-  button {
-    padding: 1rem 2.5rem;
-    font-size: 1.5rem;
-    border: none;
-    border-radius: 40px;
-    background: #ff6f61;
-    color: white;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(255,111,97,0.6);
-    transition: background 0.3s ease;
-    user-select: none;
-  }
-  button:hover {
-    background: #ff3b2e;
-  }
+        .exit-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
 
-  .animated-text {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: #fff;
-    text-shadow: 2px 2px 2px blue;
-    white-space: nowrap;
-    border-right: 3px solid rgba(255,255,255,0.75);
-    overflow: hidden;
-    width: 0;
-    margin: 0 auto;
-    animation:
-      typing 4s steps(30, end) forwards,
-      blink 0.75s step-end infinite;
-  }
+        .exit-message {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
 
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 26ch; }
-  }
+        .signature {
+            font-style: italic;
+            font-size: 1.2rem;
+            opacity: 0;
+        }
 
-  @keyframes blink {
-    50% { border-color: transparent; }
-  }
-</style>
+        .typing-effect {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 3px solid #f8bbd0;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 2px;
+            animation: typing 3.5s steps(30, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #f8bbd0; }
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .fade-out {
+            animation: fadeOut 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f8bbd0;
+            opacity: 0;
+        }
+
+        @media (max-width: 768px) {
+            .exit-title {
+                font-size: 2rem;
+            }
+            .exit-message {
+                font-size: 1.2rem;
+            }
+        }
+      h1 {
+        text-shadow: 2px 2px 2px blue;
+      }
+    </style>
 </head>
 <body>
-  <div id="container">
-    <button id="exitBtn" aria-label="Exit program">Exit Program</button>
-  </div>
+    <div class="exit-container">
+        <h1 class="exit-title">THANK YOU</h1>
+        <p class="exit-message"><span class="typing-effect"></span></p>
+        <p class="signature"></p>
+    </div>
 
-  <script>
-    const container = document.getElementById('container');
-    const exitBtn = document.getElementById('exitBtn');
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const messages = [
+                "For Visiting to our Website.",
+                "For Visiting to our Website.",
+                "For Visiting to our Website.",
+                "For Visiting to our Website."
+            ];
+            
+            const typingElement = document.querySelector('.typing-effect');
+            const exitTitle = document.querySelector('.exit-title');
+            const exitMessage = document.querySelector('.exit-message');
+            const signature = document.querySelector('.signature');
+            const container = document.querySelector('.exit-container');
 
-    exitBtn.addEventListener('click', () => {
-      container.innerHTML = '<div class="animated-text" role="alert" aria-live="assertive">Thank you for visiting our website</div>';
-    });
-  </script>
+            // Randomly select a message
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            typingElement.textContent = randomMessage;
+
+            // Animate elements with delays
+            setTimeout(() => {
+                exitTitle.classList.add('fade-in');
+            }, 500);
+
+            setTimeout(() => {
+                exitMessage.classList.add('fade-in');
+            }, 1500);
+
+            setTimeout(() => {
+                signature.classList.add('fade-in');
+                container.classList.add('pulse');
+                
+                // Create confetti effect
+                createConfetti();
+            }, 3500);
+
+            // Final animation after full sequence
+            setTimeout(() => {
+                container.classList.remove('pulse');
+                container.classList.add('fade-out');
+                
+                setTimeout(() => {
+                    // This would typically redirect or close the window
+                    // window.location.href = 'https://example.com';
+                }, 1500);
+            }, 10000);
+
+            function createConfetti() {
+                for (let i = 0; i < 50; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+                    
+                    // Random properties
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 75%)`;
+                    confetti.style.width = Math.random() * 10 + 5 + 'px';
+                    confetti.style.height = Math.random() * 10 + 5 + 'px';
+                    
+                    document.body.appendChild(confetti);
+                    
+                    // Animate each confetti piece with unique delay
+                    setTimeout(() => {
+                        confetti.style.opacity = 1;
+                        confetti.style.animation = `
+                            drop ${Math.random() * 2 + 2}s ease-in forwards,
+                            spin ${Math.random() * 2 + 2}s linear infinite
+                        `;
+                        
+                        // Keyframes for animation
+                        const style = document.createElement('style');
+                        style.textContent = `
+                            @keyframes drop {
+                                to {
+                                    top: 100vh;
+                                    transform: rotate(${Math.random() * 360}deg);
+                                }
+                            }
+                            @keyframes spin {
+                                from { transform: rotate(0deg); }
+                                to { transform: rotate(360deg); }
+                            }
+                        `;
+                        document.head.appendChild(style);
+                    }, Math.random() * 1000);
+                }
+            }
+        });
+    </script>
 </body>
 </html>
-
